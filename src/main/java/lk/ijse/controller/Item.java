@@ -80,4 +80,21 @@ public class Item extends HttpServlet {
         writer.write(json);
         writer.close();
     }
+
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(!req.getContentType().toLowerCase().startsWith("application/json")){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }else{
+            Jsonb jsonb = JsonbBuilder.create();
+            var itemDTO = jsonb.fromJson(req.getReader(), ItemDTO.class);
+            var dbProcess = new DBProcess();
+            String result =  dbProcess.updateItem(itemDTO,connection);
+            System.out.println(result);
+
+        }
+    }
+
+
 }
