@@ -31,5 +31,22 @@ import java.util.List;
 
         })
 
-public class Customer {
+public class Customer extends HttpServlet {
+
+    Connection connection;
+    @Override
+    public void init() throws ServletException {
+        //Get connection from the connection pool...
+        try {
+            InitialContext initialContext = new InitialContext();
+            DataSource dataSource= (DataSource) initialContext.lookup("java:comp/env/jdbc/pos");
+            System.out.println(dataSource);
+            this.connection=dataSource.getConnection();
+            System.out.println(connection);
+        } catch (NamingException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
