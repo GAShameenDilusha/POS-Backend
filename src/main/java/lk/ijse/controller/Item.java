@@ -27,5 +27,23 @@ import java.util.List;
         @WebInitParam(name = "db-url", value = "jdbc:mysql://localhost:3306/pos?createDatabaseIfNotExist=true"),
         @WebInitParam(name = "db-class", value = "com.mysql.cj.jdbc.Driver")
 })
-public class Item {
+
+
+public class Item extends HttpServlet {
+    Connection connection;
+
+    @Override
+    public void init() throws ServletException {
+        try {
+            InitialContext initialContext = new InitialContext();
+            DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/pos");
+            System.out.println(dataSource);
+            this.connection = dataSource.getConnection();
+            System.out.println(connection);
+        } catch (NamingException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
