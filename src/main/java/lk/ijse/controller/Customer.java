@@ -49,4 +49,20 @@ public class Customer extends HttpServlet {
     }
 
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(!req.getContentType().toLowerCase().startsWith("application/json")){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }else{
+            Jsonb jsonb = JsonbBuilder.create();
+            var customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
+            var dbProcess = new DBProcess();
+            String result =  dbProcess.saveCustomer(customerDTO,connection);
+            System.out.println(result);
+
+        }
+    }
+
+
+
 }
