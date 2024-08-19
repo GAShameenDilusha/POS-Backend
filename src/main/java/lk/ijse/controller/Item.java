@@ -46,4 +46,28 @@ public class Item extends HttpServlet {
     }
 
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (!req.getContentType().toLowerCase().startsWith("application/json")) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        } else {
+            Jsonb jsonb = JsonbBuilder.create();
+            try {
+                var itemDTO = jsonb.fromJson(req.getReader(), ItemDTO.class);
+                var dbProcess = new DBProcess();
+                String result = dbProcess.saveItem(itemDTO, connection);
+                System.out.println(result);
+
+
+                // Send a response back to the client
+                resp.getWriter().write(result);
+                resp.setStatus(HttpServletResponse.SC_OK);
+            } catch (Exception e) {
+                resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                e.printStackTrace();  // Log the exception for debugging
+            }
+        }
+    }
+
+
 }
