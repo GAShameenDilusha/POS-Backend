@@ -97,4 +97,18 @@ public class Item extends HttpServlet {
     }
 
 
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(!req.getContentType().toLowerCase().startsWith("application/json")){
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }else{
+            Jsonb jsonb = JsonbBuilder.create();
+            var itemDTO = jsonb.fromJson(req.getReader(), ItemDTO.class);
+            var dbProcess = new DBProcess();
+            String result =  dbProcess.deleteItem(itemDTO,connection);
+            System.out.println(result);
+
+        }
+    }
+
 }
