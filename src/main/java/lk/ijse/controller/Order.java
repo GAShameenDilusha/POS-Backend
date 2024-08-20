@@ -30,5 +30,24 @@ import java.util.List;
 
         })
 
-public class Order {
+public class Order extends HttpServlet{
+
+    Connection connection;
+
+    @Override
+    public void init() throws ServletException {
+        //  logger.info("Customer Servlet Initiated");
+        try {
+            InitialContext initialContext = new InitialContext();
+            DataSource dataSource = (DataSource) initialContext.lookup("java:comp/env/jdbc/pos");
+            System.out.println(dataSource);
+            this.connection = dataSource.getConnection();
+
+            System.out.println(connection);
+        } catch (NamingException | SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }
