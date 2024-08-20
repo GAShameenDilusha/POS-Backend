@@ -50,4 +50,27 @@ public class Order extends HttpServlet{
     }
 
 
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        if (req.getContentType() == null ||
+                !req.getContentType().toLowerCase().startsWith("application/json")) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        } else {
+
+            try {
+                Jsonb jsonb = JsonbBuilder.create();
+                var orderDTO = jsonb.fromJson(req.getReader(), OrderDTO.class);
+                System.out.println(orderDTO);
+                var dbProcess = new DBProcess();
+                var transaction = new Transaction();
+
+                transaction.orderTransaction(orderDTO, connection);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+
 }
