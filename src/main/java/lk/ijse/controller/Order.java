@@ -73,4 +73,20 @@ public class Order extends HttpServlet{
     }
 
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        var writer = resp.getWriter();
+
+        resp.setContentType("text/html");
+        var data = new DBProcess();
+        List<OrderDetailsDTO> getData = data.getAllOrders(connection);
+
+        Jsonb jsonb = JsonbBuilder.create();
+        String json = jsonb.toJson(getData);
+        writer.write(json);
+        writer.close();
+    }
+}
+
+
 }
