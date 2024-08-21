@@ -97,4 +97,32 @@ public class DBProcess {
         }
     }
 
+
+
+
+    public String updateCustomer(CustomerDTO customerDTO, Connection connection) {
+        try {
+            var ps = connection.prepareStatement(UPDATE_CUSTOMER);
+
+            ps.setString(1, customerDTO.getName());
+            ps.setString(2, customerDTO.getAddress());
+            ps.setString(3, customerDTO.getContact());
+            ps.setString(4, customerDTO.getCustomer_id());
+
+            if (ps.executeUpdate() != 0) {
+
+                return "Data Updates Successfully";
+            } else {
+
+                return "Failed to update data";
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+
 }
