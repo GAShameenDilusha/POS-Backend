@@ -120,6 +120,26 @@ public class DBProcess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+
+    public String deleteCustomer(CustomerDTO customerDTO, Connection connection) {
+        try {
+            var ps = connection.prepareStatement(DELETE_CUSTOMER);
+            ps.setString(1, customerDTO.getCustomer_id());
+            if (ps.executeUpdate() != 0) {
+
+                return "Data Deleted Successfully";
+            } else {
+
+                return "Failed to delete data";
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }
