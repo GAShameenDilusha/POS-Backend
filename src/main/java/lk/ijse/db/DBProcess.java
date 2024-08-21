@@ -1,5 +1,11 @@
 package lk.ijse.db;
 
+import lk.ijse.dto.CustomerDTO;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Logger;
+
 public class DBProcess {
     private static final String SAVE_DATA = "INSERT INTO customer(CUSTOMER_ID,NAME,ADDRESS,CONTACT) VALUES (?,?,?,?)";
     private static final String SAVE_ITEM_DATA = "INSERT INTO item(ITEM_ID, DESCR, PRICE, QTY) VALUES (?,?,?,?)";
@@ -21,4 +27,29 @@ public class DBProcess {
 
     final static Logger logger = LoggerFactory.getLogger(DBProcess.class);
 
+
+
+    public String saveCustomer(CustomerDTO customerDTO, Connection connection) {
+        // save / manipulate data
+        try {
+            var ps = connection.prepareStatement(SAVE_DATA);
+            ps.setString(1, customerDTO.getCustomer_id());
+            ps.setString(2, customerDTO.getName());
+            ps.setString(3, customerDTO.getAddress());
+            ps.setString(4, customerDTO.getContact());
+
+            if (ps.executeUpdate() != 0) {
+
+                return "Data saved";
+            } else {
+
+                return "Failed to save data";
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
 }
