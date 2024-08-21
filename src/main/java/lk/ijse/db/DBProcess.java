@@ -163,4 +163,29 @@ public class DBProcess {
     }
 
 
+
+    public String updateItem(ItemDTO itemDTO, Connection connection) {
+        try {
+            var ps = connection.prepareStatement(UPDATE_ITEM);
+
+            ps.setString(1, itemDTO.getDescr());
+            ps.setDouble(2, itemDTO.getPrice());
+            ps.setInt(3, itemDTO.getQty());
+            ps.setString(4, itemDTO.getItem_id());
+
+            if (ps.executeUpdate() != 0) {
+
+                return "Data Updates Successfully";
+            } else {
+
+                return "Failed to update data";
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 }
