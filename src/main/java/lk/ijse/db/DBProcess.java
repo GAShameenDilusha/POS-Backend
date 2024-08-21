@@ -1,16 +1,4 @@
-package lk.ijse.db;
-
-import lk.ijse.dto.CustomerDTO;
-import lk.ijse.dto.ItemDTO;
-import lk.ijse.dto.OrderDTO;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
+package lk.ijse.assignment_11_backend.db;
 
 import lk.ijse.assignment_11_backend.dto.CustomerDTO;
 import lk.ijse.assignment_11_backend.dto.ItemDTO;
@@ -25,7 +13,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class DBProcess {
     private static final String SAVE_DATA = "INSERT INTO customer(CUSTOMER_ID,NAME,ADDRESS,CONTACT) VALUES (?,?,?,?)";
@@ -48,8 +35,6 @@ public class DBProcess {
 
     final static Logger logger = LoggerFactory.getLogger(DBProcess.class);
 
-
-
     public String saveCustomer(CustomerDTO customerDTO, Connection connection) {
         // save / manipulate data
         try {
@@ -70,11 +55,9 @@ public class DBProcess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
     }
-
-
-
-
 
     public String saveItem(ItemDTO itemDTO, Connection connection) {
         // save / manipulate data
@@ -96,7 +79,6 @@ public class DBProcess {
     }
 
 
-
     public List<CustomerDTO> getCustomerData(Connection connection){
         //get data
         List<CustomerDTO> selectedCustomer = new ArrayList<>();
@@ -113,9 +95,6 @@ public class DBProcess {
             throw new RuntimeException(e);
         }
     }
-
-
-
 
     public String updateCustomer(CustomerDTO customerDTO, Connection connection) {
         try {
@@ -137,9 +116,9 @@ public class DBProcess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+
     }
-
-
 
     public String deleteCustomer(CustomerDTO customerDTO, Connection connection) {
         try {
@@ -157,8 +136,9 @@ public class DBProcess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
 
+
+    }
 
     public List<ItemDTO> getItemData(Connection connection) {
 
@@ -178,8 +158,6 @@ public class DBProcess {
         return selectedItem;
 
     }
-
-
 
     public String updateItem(ItemDTO itemDTO, Connection connection) {
         try {
@@ -204,10 +182,6 @@ public class DBProcess {
 
     }
 
-
-
-
-
     public String deleteItem(ItemDTO itemDTO, Connection connection) {
         try {
             var ps = connection.prepareStatement(DELETE_ITEM);
@@ -226,8 +200,6 @@ public class DBProcess {
         }
 
     }
-
-
 
     public boolean saveOrder(OrderDTO orderDTO, Connection connection) {
         try {
@@ -253,8 +225,6 @@ public class DBProcess {
 
     }
 
-
-
     public boolean saveOrderDetails(OrderDTO orderDTO, Connection connection){
         try {
             var ps = connection.prepareStatement(SAVE_ORDER_DETAILS);
@@ -277,9 +247,6 @@ public class DBProcess {
             throw new RuntimeException(e);
         }
     }
-
-
-
 
     public List<OrderDetailsDTO> getAllOrders(Connection connection) {
         List<OrderDetailsDTO> orderDTOS = new ArrayList<>();
@@ -306,3 +273,4 @@ public class DBProcess {
     }
 
 }
+
