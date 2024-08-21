@@ -1,4 +1,4 @@
-package lk.ijse.assignment_11_backend.api;
+package lk.ijse.controller;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -8,10 +8,10 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.ijse.assignment_11_backend.db.DBProcess;
-import lk.ijse.assignment_11_backend.db.Transaction;
-import lk.ijse.assignment_11_backend.dto.OrderDTO;
-import lk.ijse.assignment_11_backend.dto.OrderDetailsDTO;
+import lk.ijse.db.DBProcess;
+import lk.ijse.db.Transaction;
+import lk.ijse.dto.OrderDTO;
+import lk.ijse.dto.OrderDetailsDTO;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
