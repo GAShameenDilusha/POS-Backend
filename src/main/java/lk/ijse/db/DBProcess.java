@@ -6,6 +6,8 @@ import lk.ijse.dto.ItemDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class DBProcess {
@@ -73,6 +75,25 @@ public class DBProcess {
         } catch (SQLException e) {
             logger.error("Error saving item data", e);
             throw new RuntimeException("Failed to save item data", e);
+        }
+    }
+
+
+
+    public List<CustomerDTO> getCustomerData(Connection connection){
+        //get data
+        List<CustomerDTO> selectedCustomer = new ArrayList<>();
+        try {
+            var ps = connection.prepareStatement(GET_ALL_CUSTOMER_DATA);
+            var rs = ps.executeQuery();
+
+            while (rs.next()){
+                selectedCustomer.add(new CustomerDTO(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)));
+            }
+            return selectedCustomer;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
