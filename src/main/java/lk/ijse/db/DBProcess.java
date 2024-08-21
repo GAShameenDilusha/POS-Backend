@@ -238,4 +238,28 @@ public class DBProcess {
     }
 
 
+
+    public boolean saveOrderDetails(OrderDTO orderDTO, Connection connection){
+        try {
+            var ps = connection.prepareStatement(SAVE_ORDER_DETAILS);
+            for (ItemDTO itemDTO : orderDTO.getItems()) {
+                ps.setString(1, orderDTO.getOrder_id());
+                ps.setString(2, itemDTO.getItem_id());
+                ps.setString(3, String.valueOf(itemDTO.getQty()));
+
+                if (ps.executeUpdate() == 0) {
+                    logger.info("Order details saving failed");
+                    System.out.println("Failed to save");
+                    return false;
+                }
+            }
+            logger.info("Order details saved successfully");
+            System.out.println("Data saved");
+            return true;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
