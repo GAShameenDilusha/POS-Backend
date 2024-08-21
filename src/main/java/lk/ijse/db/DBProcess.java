@@ -140,7 +140,25 @@ public class DBProcess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+
+    public List<ItemDTO> getItemData(Connection connection) {
+
+        //get data
+        List<ItemDTO> selectedItem = new ArrayList<>();
+        try {
+            var ps = connection.prepareStatement(GET_ALL_ITEM_DATA);
+            var rs = ps.executeQuery();
+
+            while (rs.next()){
+                selectedItem.add(new ItemDTO(rs.getString(1),rs.getString(2),rs.getDouble(3),rs.getInt(4)));
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return selectedItem;
 
     }
 
