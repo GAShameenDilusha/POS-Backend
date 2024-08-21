@@ -1,4 +1,4 @@
-package lk.ijse.assignment_11_backend.filter;
+package lk.ijse.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
