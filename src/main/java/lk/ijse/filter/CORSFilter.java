@@ -1,5 +1,4 @@
-package lk.ijse.filter;
-
+package lk.ijse.assignment_11_backend.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -28,4 +27,3 @@ public class CORSFilter extends HttpFilter {
         chain.doFilter(req,res);
     }
 }
-
