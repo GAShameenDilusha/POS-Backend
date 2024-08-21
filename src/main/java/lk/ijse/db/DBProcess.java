@@ -2,6 +2,7 @@ package lk.ijse.db;
 
 import lk.ijse.dto.CustomerDTO;
 import lk.ijse.dto.ItemDTO;
+import lk.ijse.dto.OrderDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -203,6 +204,32 @@ public class DBProcess {
                 return "Failed to delete data";
             }
 
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+
+    public boolean saveOrder(OrderDTO orderDTO, Connection connection) {
+        try {
+            var ps = connection.prepareStatement(SAVE_ORDER);
+            ps.setString(1, orderDTO.getOrder_id());
+            ps.setString(2, orderDTO.getCustomer_id());
+            ps.setString(3, orderDTO.getDate());
+            ps.setString(4, orderDTO.getTotal());
+
+            if (ps.executeUpdate() != 0) {
+                logger.info("Order saved successfully");
+                System.out.println("Data saved");
+                return true;
+            } else {
+                logger.info("Order saving failed");
+                System.out.println("Failed to save");
+                return false;
+            }
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
