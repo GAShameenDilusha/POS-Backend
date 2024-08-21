@@ -1,4 +1,4 @@
-package lk.ijse.assignment_11_backend.api;
+package lk.ijse.controller;
 
 import jakarta.json.Json;
 import jakarta.json.bind.Jsonb;
@@ -10,8 +10,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lk.ijse.assignment_11_backend.db.DBProcess;
-import lk.ijse.assignment_11_backend.dto.CustomerDTO;
+import lk.ijse.db.DBProcess;
+import lk.ijse.dto.CustomerDTO;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
