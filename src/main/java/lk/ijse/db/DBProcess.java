@@ -12,6 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import lk.ijse.assignment_11_backend.dto.CustomerDTO;
+import lk.ijse.assignment_11_backend.dto.ItemDTO;
+import lk.ijse.assignment_11_backend.dto.OrderDTO;
+import lk.ijse.assignment_11_backend.dto.OrderDetailsDTO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class DBProcess {
     private static final String SAVE_DATA = "INSERT INTO customer(CUSTOMER_ID,NAME,ADDRESS,CONTACT) VALUES (?,?,?,?)";
     private static final String SAVE_ITEM_DATA = "INSERT INTO item(ITEM_ID, DESCR, PRICE, QTY) VALUES (?,?,?,?)";
