@@ -1,8 +1,10 @@
 package lk.ijse.db;
 
 import lk.ijse.dto.CustomerDTO;
+import lk.ijse.dto.ItemDTO;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
@@ -49,7 +51,29 @@ public class DBProcess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
+
+
+
+
+    public String saveItem(ItemDTO itemDTO, Connection connection) {
+        // save / manipulate data
+        try (PreparedStatement ps = connection.prepareStatement(SAVE_ITEM_DATA)) {
+            ps.setString(1, itemDTO.getItem_id());
+            ps.setString(2, itemDTO.getDescr());
+            ps.setDouble(3, itemDTO.getPrice());
+            ps.setInt(4, itemDTO.getQty());
+
+            if (ps.executeUpdate() != 0) {
+                return "Data saved";
+            } else {
+                return "Failed to save data";
+            }
+        } catch (SQLException e) {
+            logger.error("Error saving item data", e);
+            throw new RuntimeException("Failed to save item data", e);
+        }
+    }
+
 }
