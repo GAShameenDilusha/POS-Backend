@@ -188,4 +188,27 @@ public class DBProcess {
     }
 
 
+
+
+
+    public String deleteItem(ItemDTO itemDTO, Connection connection) {
+        try {
+            var ps = connection.prepareStatement(DELETE_ITEM);
+            ps.setString(1, itemDTO.getItem_id());
+            if (ps.executeUpdate() != 0) {
+
+                return "Data Deleted Successfully";
+            } else {
+
+                return "Failed to delete data";
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 }
