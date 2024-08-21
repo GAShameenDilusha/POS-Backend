@@ -1,4 +1,4 @@
-package lk.ijse.assignment_11_backend.dto;
+package lk.ijse.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,5 +15,5 @@ public class OrderDTO implements Serializable {
     private String total;
     private String date;
 
-    private lk.ijse.assignment_11_backend.dto.ItemDTO[] items;
+    private lk.ijse.dto.ItemDTO[] items;
 }
