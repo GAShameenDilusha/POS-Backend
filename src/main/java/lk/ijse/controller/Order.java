@@ -1,4 +1,4 @@
-package lk.ijse.controller;
+package lk.ijse.assignment_11_backend.api;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -30,7 +30,9 @@ import java.util.List;
 
         })
 
-public class Order extends HttpServlet{
+
+
+public class Order extends HttpServlet {
 
     Connection connection;
 
@@ -48,7 +50,6 @@ public class Order extends HttpServlet{
             throw new RuntimeException(e);
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -86,7 +87,4 @@ public class Order extends HttpServlet{
         writer.write(json);
         writer.close();
     }
-}
-
-
 }
