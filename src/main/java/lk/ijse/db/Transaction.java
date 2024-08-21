@@ -1,6 +1,6 @@
-package lk.ijse.db;
+package lk.ijse.assignment_11_backend.db;
 
-import lk.ijse.dto.OrderDTO;
+import lk.ijse.assignment_11_backend.dto.OrderDTO;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -10,7 +10,7 @@ public class Transaction {
         connection.setAutoCommit(false);
 
         try {
-            var dbProcess = new DBProcess();
+            var dbProcess = new lk.ijse.assignment_11_backend.db.DBProcess();
             if (dbProcess.saveOrder(orderDTO, connection)) {
                 if (dbProcess.saveOrderDetails(orderDTO, connection)) {
                     connection.setAutoCommit(true);
