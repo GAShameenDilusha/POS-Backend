@@ -1,5 +1,4 @@
-package lk.ijse.controller;
-
+package lk.ijse.assignment_11_backend.api;
 
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -28,7 +27,6 @@ import java.util.List;
         @WebInitParam(name = "db-class", value = "com.mysql.cj.jdbc.Driver")
 })
 
-
 public class Item extends HttpServlet {
     Connection connection;
 
@@ -44,7 +42,6 @@ public class Item extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -68,6 +65,7 @@ public class Item extends HttpServlet {
             }
         }
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -96,7 +94,6 @@ public class Item extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(!req.getContentType().toLowerCase().startsWith("application/json")){
@@ -110,5 +107,4 @@ public class Item extends HttpServlet {
 
         }
     }
-
 }
