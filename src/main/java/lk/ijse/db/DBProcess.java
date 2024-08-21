@@ -1,9 +1,9 @@
-package lk.ijse.assignment_11_backend.db;
+package lk.ijse.db;
 
-import lk.ijse.assignment_11_backend.dto.CustomerDTO;
-import lk.ijse.assignment_11_backend.dto.ItemDTO;
-import lk.ijse.assignment_11_backend.dto.OrderDTO;
-import lk.ijse.assignment_11_backend.dto.OrderDetailsDTO;
+import lk.ijse.dto.CustomerDTO;
+import lk.ijse.dto.ItemDTO;
+import lk.ijse.dto.OrderDTO;
+import lk.ijse.dto.OrderDetailsDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
