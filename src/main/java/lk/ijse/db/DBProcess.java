@@ -6,6 +6,7 @@ import lk.ijse.dto.OrderDTO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -260,6 +261,33 @@ public class DBProcess {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+
+
+    public List<OrderDetailsDTO> getAllOrders(Connection connection) {
+        List<OrderDetailsDTO> orderDTOS = new ArrayList<>();
+
+        try {
+            var ps = connection.prepareStatement(GET_ALL_ORDERS);
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                orderDTOS.add(new OrderDetailsDTO(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4)
+                ));
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return orderDTOS;
     }
 
 }
