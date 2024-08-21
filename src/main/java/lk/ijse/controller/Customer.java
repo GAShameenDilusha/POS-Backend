@@ -1,4 +1,4 @@
-package lk.ijse.controller;
+package lk.ijse.assignment_11_backend.api;
 
 import jakarta.json.Json;
 import jakarta.json.bind.Jsonb;
@@ -30,10 +30,9 @@ import java.util.List;
                 @WebInitParam(name = "db-class",value = "com.mysql.cj.jdbc.Driver")
 
         })
-
 public class Customer extends HttpServlet {
-
     Connection connection;
+
     @Override
     public void init() throws ServletException {
         //Get connection from the connection pool...
@@ -47,7 +46,6 @@ public class Customer extends HttpServlet {
             throw new RuntimeException(e);
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,7 +61,6 @@ public class Customer extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var writer = resp.getWriter();
@@ -76,7 +73,6 @@ public class Customer extends HttpServlet {
         writer.close();
 
     }
-
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -92,7 +88,6 @@ public class Customer extends HttpServlet {
         }
     }
 
-
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if(!req.getContentType().toLowerCase().startsWith("application/json")){
@@ -106,5 +101,5 @@ public class Customer extends HttpServlet {
 
         }
     }
-
 }
+
