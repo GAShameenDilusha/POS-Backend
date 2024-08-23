@@ -8,6 +8,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lk.ijse.dao.custom.ItemDAO;
+import lk.ijse.dao.impl.ItemDAOImpl;
 import lk.ijse.db.DBProcess;
 import lk.ijse.dto.CustomerDTO;
 import lk.ijse.dto.ItemDTO;
@@ -51,8 +53,8 @@ public class Item extends HttpServlet {
             Jsonb jsonb = JsonbBuilder.create();
             try {
                 var itemDTO = jsonb.fromJson(req.getReader(), ItemDTO.class);
-                var dbProcess = new DBProcess();
-                String result = dbProcess.saveItem(itemDTO, connection);
+                var itemdao = new ItemDAOImpl();
+                String result = itemdao.saveItem(itemDTO, connection);
                 System.out.println(result);
 
 
@@ -71,8 +73,8 @@ public class Item extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var writer = resp.getWriter();
         resp.setContentType("text/html");
-        var data = new DBProcess();
-        List<ItemDTO> getData = data.getItemData(connection);
+        var itemdao = new ItemDAOImpl();
+        List<ItemDTO> getData = itemdao.getItemData(connection);
         Jsonb jsonb = JsonbBuilder.create();
         String json = jsonb.toJson(getData);
         writer.write(json);
@@ -87,8 +89,8 @@ public class Item extends HttpServlet {
         }else{
             Jsonb jsonb = JsonbBuilder.create();
             var itemDTO = jsonb.fromJson(req.getReader(), ItemDTO.class);
-            var dbProcess = new DBProcess();
-            String result =  dbProcess.updateItem(itemDTO,connection);
+            var itemdao = new ItemDAOImpl();
+            String result =  itemdao.updateItem(itemDTO,connection);
             System.out.println(result);
 
         }
@@ -101,8 +103,8 @@ public class Item extends HttpServlet {
         }else{
             Jsonb jsonb = JsonbBuilder.create();
             var itemDTO = jsonb.fromJson(req.getReader(), ItemDTO.class);
-            var dbProcess = new DBProcess();
-            String result =  dbProcess.deleteItem(itemDTO,connection);
+            var itemdao = new ItemDAOImpl();
+            String result =  itemdao.deleteItem(itemDTO,connection);
             System.out.println(result);
 
         }
