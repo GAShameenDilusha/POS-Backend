@@ -10,6 +10,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lk.ijse.dao.custom.CustomerDAO;
+import lk.ijse.dao.impl.CustomerDAOImpl;
 import lk.ijse.db.DBProcess;
 import lk.ijse.dto.CustomerDTO;
 
@@ -54,8 +56,8 @@ public class Customer extends HttpServlet {
         }else{
             Jsonb jsonb = JsonbBuilder.create();
             var customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
-            var dbProcess = new DBProcess();
-            String result =  dbProcess.saveCustomer(customerDTO,connection);
+            var customerdao = new CustomerDAOImpl();
+            String result =  customerdao.saveCustomer(customerDTO,connection);
             System.out.println(result);
 
         }
@@ -65,8 +67,8 @@ public class Customer extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         var writer = resp.getWriter();
         resp.setContentType("text/html");
-        var data = new DBProcess();
-        List <CustomerDTO>  getData = data.getCustomerData(connection);
+        var customerdao = new CustomerDAOImpl();
+        List <CustomerDTO>  getData = customerdao.getCustomerData(connection);
         Jsonb jsonb = JsonbBuilder.create();
         String json = jsonb.toJson(getData);
         writer.write(json);
@@ -81,8 +83,8 @@ public class Customer extends HttpServlet {
         }else{
             Jsonb jsonb = JsonbBuilder.create();
             var customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
-            var dbProcess = new DBProcess();
-            String result =  dbProcess.updateCustomer(customerDTO,connection);
+            var customerdao = new CustomerDAOImpl();
+            String result =  customerdao.updateCustomer(customerDTO,connection);
             System.out.println(result);
 
         }
@@ -95,8 +97,8 @@ public class Customer extends HttpServlet {
         }else{
             Jsonb jsonb = JsonbBuilder.create();
             var customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
-            var dbProcess = new DBProcess();
-            String result =  dbProcess.deleteCustomer(customerDTO,connection);
+            var customerdao = new CustomerDAOImpl();
+            String result =  customerdao.deleteCustomer(customerDTO,connection);
             System.out.println(result);
 
         }
