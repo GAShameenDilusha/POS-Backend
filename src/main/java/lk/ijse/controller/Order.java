@@ -8,6 +8,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lk.ijse.dao.custom.OrderDAO;
+import lk.ijse.dao.impl.OrderDAOImpl;
 import lk.ijse.db.DBProcess;
 import lk.ijse.db.Transaction;
 import lk.ijse.dto.OrderDTO;
@@ -63,10 +65,10 @@ public class Order extends HttpServlet {
                 Jsonb jsonb = JsonbBuilder.create();
                 var orderDTO = jsonb.fromJson(req.getReader(), OrderDTO.class);
                 System.out.println(orderDTO);
-                var dbProcess = new DBProcess();
-                var transaction = new Transaction();
+                //var orderdao = new OrderDAOImpl();
+                var orderdao = new OrderDAOImpl();
 
-                transaction.orderTransaction(orderDTO, connection);
+                orderdao.orderTransaction(orderDTO, connection);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -79,8 +81,8 @@ public class Order extends HttpServlet {
         var writer = resp.getWriter();
 
         resp.setContentType("text/html");
-        var data = new DBProcess();
-        List<OrderDetailsDTO> getData = data.getAllOrders(connection);
+        var orderdao = new OrderDAOImpl();
+        List<OrderDetailsDTO> getData = orderdao.getAllOrders(connection);
 
         Jsonb jsonb = JsonbBuilder.create();
         String json = jsonb.toJson(getData);
